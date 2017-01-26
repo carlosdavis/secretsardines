@@ -1,6 +1,6 @@
 {% comment %}
 
-	Slate by Pixelarity
+	Telemetry by Pixelarity
 	pixelarity.com | hello@pixelarity.com
 	License: pixelarity.com/license
 
@@ -18,83 +18,54 @@
 
 {% endcomment %}
 
-<!-- Contact -->
-	<section id="contact" class="wrapper split">
-		<div class="inner">
-			<section>
-				<h2>Send us a message</h2>
-				<form method="post" action="#">
-					<div class="row uniform">
-						<div class="6u 12u$(large) 6u(medium) 12u$(xsmall)">
-							<label for="name">Name</label>
-							<input type="text" name="name" id="name" />
-						</div>
-						<div class="6u$ 12u$(large) 6u$(medium) 12u$(xsmall)">
-							<label for="email">Email</label>
-							<input type="email" name="email" id="email" />
-						</div>
-						<div class="12u$">
-							<label for="message">Message</label>
-							<textarea name="message" id="message" rows="5"></textarea>
-						</div>
-						<div class="12u$">
-							<ul class="actions">
-								<li><input type="submit" value="Send Message" class="special" /></li>
-								<li><input type="reset" value="Reset" /></li>
-							</ul>
-						</div>
-					</div>
-				</form>
-			</section>
-			<section>
-				<h2>Other ways to reach us</h2>
-				<ul class="bulleted-icons">
-					<li>
-						<span class="icon-wrapper"><span class="icon fa-envelope"></span></span>
-						<h3>Email</h3>
-						<p><a href="#">information@untitled.tld</a></p>
-					</li>
-					<li>
-						<span class="icon-wrapper"><span class="icon fa-twitter"></span></span>
-						<h3>Twitter</h3>
-						<p><a href="#">twitter.com/untitled-tld</a></p>
-					</li>
-					<li>
-						<span class="icon-wrapper"><span class="icon fa-phone"></span></span>
-						<h3>Phone</h3>
-						<p>(800) 555-0000</p>
-					</li>
-					<li>
-						<span class="icon-wrapper"><span class="icon fa-facebook"></span></span>
-						<h3>Facebook</h3>
-						<p><a href="#">facebook.com/untitled-tld</a></p>
-					</li>
-					<li>
-						<span class="icon-wrapper"><span class="icon fa-home"></span></span>
-						<h3>Mailing Address</h3>
-						<p>1234 Fictional Avenue<br />
-						Nashville, TN 00000<br />
-						United States
-						</p>
-					</li>
-					<li>
-						<span class="icon-wrapper"><span class="icon fa-linkedin"></span></span>
-						<h3>LinkedIn</h3>
-						<p><a href="#">linkedin.com/untitled-tld</a></p>
-					</li>
-				</ul>
-			</section>
-		</div>
-	</section>
 
 <!-- Footer -->
 	<footer id="footer">
 		<div class="inner">
-			<p class="copyright">&copy; Untitled Corp. All rights reserved. Lorem ipsum dolor sit amet feugiat tempus aliquam.</p>
-			<ul class="menu">
-				<li><a href="#">Terms<span> of Use</span></a></li>
-				<li><a href="#">Privacy<span> Policy</span></a></li>
-				<li><a href="#">Legal<span> Information</span></a></li>
-			</ul>
+			<div class="split style1">
+				<div class="contact">
+					<h2>Contact</h2>
+					<ul class="contact-icons">
+						<li class="icon fa-home"><a href="#">1234 Fictional Street #5432<br>Nashville, TN 00000-0000</a></li>
+						<li class="icon fa-phone"><a href="#">(000) 000-0000</a></li>
+						<li class="icon fa-envelope-o"><a href="#">info@untitled.tld</a></li>
+					</ul>
+					<ul class="icons-bordered">
+						<li><a class="icon fa-facebook" href="#">
+							<span class="label">Facebook</span>
+						</a></li>
+						<li><a class="icon fa-twitter" href="#">
+							<span class="label">Twitter</span>
+						</a></li>
+						<li><a class="icon fa-instagram" href="#">
+							<span class="label">Instagram</span>
+						</a></li>
+						<li><a class="icon fa-github" href="#">
+							<span class="label">GitHub</span>
+						</a></li>
+						<li><a class="icon fa-linkedin" href="#">
+							<span class="label">LinkedIn</span>
+						</a></li>
+					</ul>
+				</div>
+				<form action="#" method="post">
+					<h2>Email Us</h2>
+					<div class="field half first">
+						<input name="name" id="name" placeholder="Name" type="text" />
+					</div>
+					<div class="field half">
+						<input name="email" id="email" placeholder="Email" type="email" />
+					</div>
+					<div class="field">
+						<textarea name="message" id="message" rows="6" placeholder="Message"></textarea>
+					</div>
+					<ul class="actions">
+						<li><input value="Send Message" class="button" type="submit" /></li>
+					</ul>
+				</form>
+			</div>
+			<div class="copyright">
+				<p>&copy; 2017 What is even here that you would steal? Seriously.</p>
+			</div>
 		</div>
 	</footer>

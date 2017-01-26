@@ -1,9 +1,5 @@
-@import '../libs/vars';
-@import '../libs/functions';
-@import '../libs/mixins';
-
 ///
-/// Slate by Pixelarity
+/// Telemetry by Pixelarity
 /// pixelarity.com | hello@pixelarity.com
 /// License: pixelarity.com/license
 ///
@@ -12,189 +8,117 @@
 
 	#banner {
 		@include color-typography(accent1);
-		min-height: 40em;
-		height: 75vh;
+		@include color-button(accent1);
+		@include padding(8em, 0, (2em, 0, 0, 0));
+		@include vendor('display', 'flex');
+		@include vendor('align-items', 'center');
+		@include vendor('justify-content', 'center');
+		background-attachment: fixed;
+		background-image: url('../../images/banner.jpg');
+		background-position: bottom left;
+		background-size: cover;
+		border-top: solid 10px _palette(accent1, bg);
+		min-height: 75vh;
 		position: relative;
+		text-align: center;
+		width: 100%;
 
-		&:after {
-			@include vendor('pointer-events', 'none');
-			@include vendor('transition', 'opacity 1.5s ease-in-out, visibility 1.5s');
-			background: #000511;
+		> .inner {
+			@include vendor('transition', (
+				'transform 0.75s ease-in-out',
+				'opacity 0.75s ease-in-out'
+			));
+			position: relative;
+			width: 45em;
+			max-width: calc(100% - #{_size(gutter) * 2});
+			z-index: 1;
+		}
+
+		.icon {
+			display: inline-block;
+			background-color: white;
+			border-radius: 100%;
+			color: _palette(accent1, bg);
+			font-size: 3.75em;
+			height: 1.6em;
+			line-height: 1.5em;
+			margin-bottom: 0.75em;
+			width: 1.6em;
+		}
+
+		h1 {
+			margin-bottom: 0.825em;
+		}
+
+		p {
+			font-size: 1.5em;
+			margin-bottom: 1.75em;
+		}
+
+		.actions {
+			border-top: solid _size(border-width) _palette(accent1, border);
+			padding-top: (_size(element-margin) * 1.75);
+		}
+
+		&:before {
+			@include vendor('transition', 'opacity 1s ease-in-out');
+			@include vendor('transition-delay', '0.75s');
 			content: '';
 			display: block;
+			background: rgba(32,32,32,1);
 			height: 100%;
 			left: 0;
-			opacity: 0;
+			opacity: 0.25;
 			position: absolute;
 			top: 0;
-			visibility: hidden;
 			width: 100%;
-			z-index: 2;
-		}
-
-		.indicators {
-			bottom: 1.5em;
-			left: 0;
-			list-style: none;
-			margin: 0;
-			padding: 0;
-			position: absolute;
-			text-align: center;
-			width: 100%;
-			z-index: 2;
-
-			li {
-				cursor: pointer;
-				display: inline-block;
-				height: 2em;
-				overflow: hidden;
-				padding: 0;
-				position: relative;
-				text-indent: 2em;
-				width: 2em;
-
-				&:before {
-					background: rgba(255,255,255,0.35);
-					border-radius: 100%;
-					content: '';
-					display: inline-block;
-					height: 0.8em;
-					left: 50%;
-					margin: -0.4em 0 0 -0.4em;
-					position: absolute;
-					text-indent: 0;
-					top: 50%;
-					width: 0.8em;
-				}
-
-				&.visible {
-					&:before {
-						background: #fff;
-					}
-				}
-			}
-		}
-
-		> article {
-			@include vendor('transition', 'opacity 1.5s ease, visibility 1.5s');
-			background-attachment: fixed;
-			background-position: center;
-			background-repeat: no-repeat;
-			background-size: cover;
-			height: 100%;
-			left: 0;
-			opacity: 0;
-			position: absolute;
-			text-align: center;
-			top: 0;
-			visibility: hidden;
-			width: 100%;
-			z-index: 0;
-
-			&:before {
-				content: '';
-				display: inline-block;
-				height: 100%;
-				vertical-align: middle;
-			}
-
-			&:after {
-				content: '';
-				display: block;
-				width: 100%;
-				height: 100%;
-				position: absolute;
-				top: 0;
-				left: 0;
-				background: #000;
-				opacity: 0.35;
-			}
-
-			.inner {
-				position: relative;
-				display: inline-block;
-				vertical-align: middle;
-				z-index: 1;
-
-				> :last-child {
-					margin-bottom: 0;
-				}
-			}
-
-			h2 {
-				font-weight: _font(weight-heading-extrabold);
-				font-size: 2.75em;
-				padding-bottom: 0;
-				margin: 0 0 (_size(element-margin) * 0.25) 0;
-
-				&:after {
-					display: none;
-				}
-			}
-
-			img {
-				display: none;
-			}
-
-			&.visible {
-				opacity: 1;
-				visibility: visible;
-			}
-
-			&.top {
-				z-index: 1;
-			}
-
-			&.instant {
-				@include vendor('transition', 'none !important');
-			}
 		}
 
 		body.is-loading & {
-			&:after {
-				opacity: 1.0;
-				visibility: visible;
+			> .inner {
+				@include vendor('transform', 'translateY(0.75em)');
+				opacity: 0;
 			}
+
+			&:before {
+				opacity: 1;
+			}
+		}
+
+		@include breakpoint(xlarge) {
+			min-height: 0;
 		}
 
 		@include breakpoint(large) {
-			min-height: 35em;
-			height: 60vh;
-
-			> article {
-				h2 {
-					font-size: 2.25em;
-				}
-			}
+			@include padding(5em, 0, (1em, 0, 0, 0));
+			background-attachment: scroll;
 		}
 
 		@include breakpoint(medium) {
-			min-height: 50em;
-			height: 75vh;
+			@include padding(8em, 0, (2em, 0, 0, 0));
 
-			> article {
-				background-attachment: scroll;
+			.icon {
+				margin-bottom: 0.5em;
 			}
 		}
 
 		@include breakpoint(small) {
-			min-height: 25em;
+			@include padding(4em, 0, (1em, 0, 0, 0));
 
-			> article {
-				.inner {
-					width: 90%;
-				}
+			> .inner {
+				max-width: calc(100% - 3em);
+			}
 
-				h2 {
-					font-size: 1.75em;
-					line-height: 1.25em;
-				}
+			.icon {
+				font-size: 3.25em;
+			}
+
+			.actions {
+				padding-top: _size(element-margin);
 			}
 		}
 
-		body.is-mobile & {
-			> article {
-				background-attachment: scroll;
-			}
+		@include breakpoint(xsmall) {
+			@include padding(3em, 0, (1em, 0, 0, 0));
 		}
 	}

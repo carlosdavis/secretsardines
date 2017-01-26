@@ -1,30 +1,8 @@
 /*
-	Slate by Pixelarity
+	Telemetry by Pixelarity
 	pixelarity.com | hello@pixelarity.com
 	License: pixelarity.com/license
 */
-
-
-var settings = {
-
-	banner: {
-
-		// Indicators (= the clickable dots at the bottom).
-			indicators: true,
-
-		// Transition speed (in ms)
-		// For timing purposes only. It *must* match the transition speed of "#banner > article".
-			speed: 1500,
-
-		// Transition delay (in ms)
-			delay: 5000,
-
-		// Parallax intensity (between 0 and 1; higher = more intense, lower = less intense; 0 = off)
-			parallax: 0.25
-
-	}
-
-};
 
 (function($) {
 
@@ -92,7 +70,7 @@ var settings = {
 
 			skel.on('change', function() {
 
-				if (skel.breakpoint('medium').active)
+				if (skel.breakpoint('large').active)
 					(off)();
 				else
 					(on)();
@@ -111,154 +89,12 @@ var settings = {
 
 	};
 
-	/**
-	 * Custom banner slider for Slate.
-	 * @return {jQuery} jQuery object.
-	 */
-	$.fn._slider = function(options) {
-
-		var	$window = $(window),
-			$this = $(this);
-
-		if (this.length == 0)
-			return $this;
-
-		if (this.length > 1) {
-
-			for (var i=0; i < this.length; i++)
-				$(this[i])._slider(options);
-
-			return $this;
-
-		}
-
-		// Vars.
-			var	current = 0, pos = 0, lastPos = 0,
-				slides = [], indicators = [],
-				$indicators,
-				$slides = $this.children('article'),
-				intervalId,
-				isLocked = false,
-				i = 0;
-
-		// Turn off indicators if we only have one slide.
-			if ($slides.length == 1)
-				options.indicators = false;
-
-		// Functions.
-			$this._switchTo = function(x, stop) {
-
-				if (isLocked || pos == x)
-					return;
-
-				isLocked = true;
-
-				if (stop)
-					window.clearInterval(intervalId);
-
-				// Update positions.
-					lastPos = pos;
-					pos = x;
-
-				// Hide last slide.
-					slides[lastPos].removeClass('top');
-
-					if (options.indicators)
-						indicators[lastPos].removeClass('visible');
-
-				// Show new slide.
-					slides[pos].addClass('visible').addClass('top');
-
-					if (options.indicators)
-						indicators[pos].addClass('visible');
-
-				// Finish hiding last slide after a short delay.
-					window.setTimeout(function() {
-
-						slides[lastPos].addClass('instant').removeClass('visible');
-
-						window.setTimeout(function() {
-
-							slides[lastPos].removeClass('instant');
-							isLocked = false;
-
-						}, 100);
-
-					}, options.speed);
-
-			};
-
-		// Indicators.
-			if (options.indicators)
-				$indicators = $('<ul class="indicators"></ul>').appendTo($this);
-
-		// Slides.
-			$slides
-				.each(function() {
-
-					var $slide = $(this),
-						$img = $slide.find('img');
-
-					// Slide.
-						$slide
-							.css('background-image', 'url("' + $img.attr('src') + '")')
-							.css('background-position', ($slide.data('position') ? $slide.data('position') : 'center'));
-
-					// Add to slides.
-						slides.push($slide);
-
-					// Indicators.
-						if (options.indicators) {
-
-							var $indicator_li = $('<li>' + i + '</li>').appendTo($indicators);
-
-							// Indicator.
-								$indicator_li
-									.data('index', i)
-									.on('click', function() {
-										$this._switchTo($(this).data('index'), true);
-									});
-
-							// Add to indicators.
-								indicators.push($indicator_li);
-
-						}
-
-					i++;
-
-				})
-				._parallax(options.parallax);
-
-		// Initial slide.
-			slides[pos].addClass('visible').addClass('top');
-
-			if (options.indicators)
-				indicators[pos].addClass('visible');
-
-		// Bail if we only have a single slide.
-			if (slides.length == 1)
-				return;
-
-		// Main loop.
-			intervalId = window.setInterval(function() {
-
-				current++;
-
-				if (current >= slides.length)
-					current = 0;
-
-				$this._switchTo(current);
-
-			}, options.delay);
-
-	};
-
 	$(function() {
 
 		var	$window = $(window),
-			$body = $('body'),
 			$header = $('#header'),
-			$banner = $('#banner');
+			$banner = $('#banner'),
+			$body = $('body');
 
 		// Disable animations/transitions until the page has loaded.
 			$body.addClass('is-loading');
@@ -269,25 +105,8 @@ var settings = {
 				}, 100);
 			});
 
-		// Mobile?
-			if (skel.vars.mobile)
-				$body.addClass('is-mobile');
-			else
-				skel
-					.on('-medium !medium', function() {
-						$body.removeClass('is-mobile');
-					})
-					.on('+medium', function() {
-						$body.addClass('is-mobile');
-					});
-
 		// Fix: Placeholder polyfill.
 			$('form').placeholder();
-
-		// Fix: Post wrapping on IE<10.
-			if (skel.vars.IEVersion < 10)
-				$('.posts > .post:nth-child(3n + 1)')
-					.addClass('first');
 
 		// Prioritize "important" elements on medium.
 			skel.on('+medium -medium', function() {
@@ -297,11 +116,8 @@ var settings = {
 				);
 			});
 
-		// Dropdowns.
-			$('#nav > ul').dropotron({
-				alignment: 'center',
-				hideDelay: 400
-			});
+		// Scrolly.
+			$('.scrolly').scrolly();
 
 		// Header.
 			if (skel.vars.IEVersion < 9)
@@ -316,29 +132,32 @@ var settings = {
 					bottom:		$header.outerHeight(),
 					terminate:	function() { $header.removeClass('alt'); },
 					enter:		function() { $header.addClass('alt'); },
-					leave:		function() { $header.removeClass('alt'); $header.addClass('reveal'); }
+					leave:		function() { $header.removeClass('alt'); }
 				});
 
 			}
 
 		// Banner.
-			$banner._slider(settings.banner);
+			if ($banner.length > 0)
+				$banner._parallax(0.25);
 
-		// Off-Canvas Navigation.
+		// Dropdowns.
+			$('#nav > ul').dropotron({
+				alignment: 'right',
+				hideDelay: 350,
+				baseZIndex: 100000
+			});
 
-			// Navigation Panel Toggle.
-				$('<a href="#navPanel" class="navPanelToggle"></a>')
-					.appendTo($header);
+		// Menu.
+			$('<a href="#navPanel" class="navPanelToggle button">Menu</a>')
+				.appendTo($header);
 
-			// Navigation Panel.
-				$(
-					'<div id="navPanel">' +
-						'<nav>' +
-							$('#nav').navList() +
-						'</nav>' +
-						'<a href="#navPanel" class="close"></a>' +
-					'</div>'
-				)
+			$(	'<div id="navPanel">' +
+					'<nav>' +
+						$('#nav') .navList() +
+					'</nav>' +
+					'<a href="#navPanel" class="close"></a>' +
+				'</div>')
 					.appendTo($body)
 					.panel({
 						delay: 500,
@@ -349,10 +168,37 @@ var settings = {
 						side: 'right'
 					});
 
-			// Fix: Remove transitions on WP<10 (poor/buggy performance).
-				if (skel.vars.os == 'wp' && skel.vars.osVersion < 10)
-					$('#navPanel')
-						.css('transition', 'none');
+			if (skel.vars.os == 'wp'
+			&&	skel.vars.osVersion < 10)
+				$('#navPanel')
+					.css('transition', 'none');
+
+		// Tabs.
+			$('.tabs').selectorr({
+				titleSelector: 'h3',
+				delay: 250
+			});
+
+		// Quotes.
+			$('.quotes > article')
+				.each(function() {
+
+					var	$this = $(this),
+						$image = $this.find('.image'),
+						$img = $image.find('img'),
+						x;
+
+					// Assign image.
+						$this.css('background-image', 'url(' + $img.attr('src') + ')');
+
+					// Set background position.
+						if (x = $img.data('position'))
+							$this.css('background-position', x);
+
+					// Hide image.
+						$image.hide();
+
+				});
 
 	});
 

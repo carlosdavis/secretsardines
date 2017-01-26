@@ -1,9 +1,5 @@
-@import '../libs/vars';
-@import '../libs/functions';
-@import '../libs/mixins';
-
 ///
-/// Slate by Pixelarity
+/// Telemetry by Pixelarity
 /// pixelarity.com | hello@pixelarity.com
 /// License: pixelarity.com/license
 ///
@@ -12,30 +8,53 @@
 
 	form {
 		margin: 0 0 _size(element-margin) 0;
+
+		.field {
+			margin-bottom: 1.5em;
+
+			&.half {
+				display: inline-block;
+				width: 48%;
+
+				&.first {
+					margin-right: 3%;
+				}
+			}
+		}
+
+		> .actions {
+			margin-top: _size(element-margin) * 1.5;
+		}
+
+		@include breakpoint(medium) {
+			.field {
+				&.half {
+					display: block;
+					width: 100%;
+
+					&.first {
+						margin-right: 0;
+					}
+				}
+			}
+		}
 	}
 
 	label {
 		display: block;
-		margin: 0 0 (_size(element-margin) * 0.25) 0;
-		text-transform: uppercase;
 		font-size: 0.9em;
-		font-family: _font(family-heading);
-		font-weight: _font(weight-heading-bold);
+		font-weight: _font(weight-bold);
+		margin: 0 0 (_size(element-margin) * 0.5) 0;
 	}
 
 	input[type="text"],
 	input[type="password"],
 	input[type="email"],
-	input[type="tel"],
-	input[type="search"],
-	input[type="url"],
 	select,
 	textarea {
 		@include vendor('appearance', 'none');
-		border: none;
-		border: solid 1px;
-		border-radius: 0;
-		background-color: transparent;
+		border-radius: _size(border-radius);
+		border: solid _size(border-width);
 		color: inherit;
 		display: block;
 		outline: 0;
@@ -54,7 +73,7 @@
 		position: relative;
 
 		&:before {
-			content: '\f107';
+			content: '\f078';
 			display: block;
 			height: _size(element-height);
 			line-height: _size(element-height);
@@ -74,15 +93,13 @@
 	input[type="text"],
 	input[type="password"],
 	input[type="email"],
-	input[type="tel"],
-	input[type="search"],
-	input[type="url"],
 	select {
 		height: _size(element-height);
 	}
 
 	textarea {
 		padding: 0.75em 1em;
+		resize: vertical;
 	}
 
 	input[type="checkbox"],
@@ -99,16 +116,15 @@
 			@include icon;
 			cursor: pointer;
 			display: inline-block;
+			font-size: 1em;
+			font-weight: _font(weight);
 			padding-left: (_size(element-height) * 0.6) + 0.75em;
 			padding-right: 0.75em;
 			position: relative;
-			font-size: 1em;
-			font-family: _font(family);
-			font-weight: _font(weight);
-			text-transform: none;
 
 			&:before {
-				border: solid 1px;
+				border-radius: _size(border-radius);
+				border: solid _size(border-width);
 				content: '';
 				display: inline-block;
 				height: (_size(element-height) * 0.6);
@@ -131,6 +147,7 @@
 	input[type="checkbox"] {
 		& + label {
 			&:before {
+				border-radius: _size(border-radius);
 			}
 		}
 	}
@@ -173,27 +190,26 @@
 		input[type="text"],
 		input[type="password"],
 		input[type="email"],
-		input[type="tel"],
-		input[type="search"],
-		input[type="url"],
 		select,
 		textarea {
-			@include vendor('transition', 'border-color #{_duration(transition)} ease-in-out');
+			background: transparent;
 			border-color: _palette($p, border);
 
 			&:focus {
 				@if $p == $highlight {
 					border-color: _palette($p, fg-bold);
+					box-shadow: 0 0 0 _size(border-width) _palette($p, fg-bold);
 				}
 				@else {
 					border-color: _palette(accent1, bg);
+					box-shadow: 0 0 0 _size(border-width) _palette(accent1, bg);
 				}
 			}
 		}
 
 		.select-wrapper {
 			&:before {
-				color: _palette($p, fg-light);
+				color: _palette($p, border);
 			}
 		}
 
@@ -203,7 +219,6 @@
 				color: _palette($p, fg);
 
 				&:before {
-					@include vendor('transition', 'border-color #{_duration(transition)} ease-in-out');
 					background: _palette($p, border-bg);
 					border-color: _palette($p, border);
 				}
@@ -228,9 +243,11 @@
 				&:before {
 					@if $p == $highlight {
 						border-color: _palette($p, fg-bold);
+						box-shadow: 0 0 0 _size(border-width) _palette($p, fg-bold);
 					}
 					@else {
 						border-color: _palette(accent1, bg);
+						box-shadow: 0 0 0 _size(border-width) _palette(accent1, bg);
 					}
 				}
 			}

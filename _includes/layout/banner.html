@@ -25,17 +25,18 @@
 		---
 
 		{% include layout/banner.html slides=page.my_slides_array %}
+		{% include layout/banner.html title=page.banner_title message=page.banner_message %}
 
 {% endcomment %}
 
 <!-- Banner -->
 	<section id="banner">
-		{% for slide in include.slides %}
-			<article>
-				<img src="{{ site.baseurl }}{{ slide.image }}" alt="" />
-				<div class="inner">
-					<h2><a href="{{ slide.url }}">{{ slide.title }}</a></h2>
-				</div>
-			</article>
-		{% endfor %}
+		<div class="inner">
+			<h1>{{ includes.title }}</h1>
+			{% if includes.message %}
+				<p class="actions">
+					{{ message }}
+				</p>
+			{% endif %}
+		</div>
 	</section>

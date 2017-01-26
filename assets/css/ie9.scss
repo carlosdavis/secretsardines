@@ -1,148 +1,102 @@
----
----
 @import 'libs/vars';
 @import 'libs/functions';
 @import 'libs/mixins';
 @import 'libs/skel';
 
 /*
-	Slate by Pixelarity
+	Telemetry by Pixelarity
 	pixelarity.com | hello@pixelarity.com
 	License: pixelarity.com/license
 */
 
-/* List */
-
-	ul {
-		&.bulleted-icons {
-			&:after {
-				content: '';
-				display: block;
-				clear: both;
-			}
-
-			li {
-				float: left;
-				width: 50%;
-				padding-right: 1.55em !important;
-			}
-		}
-	}
-
-/* Spotlight */
-
-	.spotlight {
-		&:after {
-			content: '';
-			display: block;
-			clear: both;
-		}
-
-		.content {
-			float: left;
-			padding-right: 1.5em !important;
-			width: 33.33333%;
-		}
-
-		.image {
-			width: 66.66666%;
-		}
-	}
-
 /* Features */
 
 	.features {
+		> article {
+			float: left;
+			width: 48%;
+		}
+
 		&:after {
 			content: '';
 			display: block;
 			clear: both;
 		}
-
-		> section {
-			width: 33.33333%;
-			float: left;
-			padding-right: 1.5em !important;
-
-			&:before {
-				display: none;
-			}
-		}
 	}
 
-/* Posts */
+/* Stats */
 
-	.posts {
+	.stats {
+		> article {
+			float: left;
+			width: 24%;
+		}
+
 		&:after {
 			content: '';
 			display: block;
 			clear: both;
 		}
+	}
 
-		.post {
-			width: 33.33333%;
+/* Split */
+
+	.split {
+		> * {
 			float: left;
-			padding-right: 1.5em !important;
+			width: 42% !important;
+		}
 
-			&.first {
-				clear: both;
+		&:after {
+			content: '';
+			display: block;
+			clear: both;
+		}
+	}
+
+/* Quotes */
+
+	.quotes {
+		> article {
+			float: left;
+		}
+
+		&:after {
+			content: '';
+			display: block;
+			clear: both;
+		}
+	}
+
+/* Header */
+
+	#header {
+		> .logo {
+			float: left;
+		}
+
+		> nav {
+			float: right;
+			margin-top: 0.625em;
+
+			> ul {
+				> li {
+					display: inline-block;
+				}
+			}
+		}
+
+		&.alt {
+			> nav {
+				margin-top: 0;
 			}
 		}
 	}
 
-/* Wrapper */
+/* Banner */
 
-	.wrapper {
-		&.split {
-			> .inner {
-				&:after {
-					content: '';
-					display: block;
-					clear: both;
-				}
-
-				> * {
-					width: 50%;
-					float: left;
-					padding-right: 4em !important;
-
-					&:before {
-						display: none;
-					}
-				}
-			}
-		}
-
-		&.sidebar {
-			> .inner {
-				&:after {
-					content: '';
-					display: block;
-					clear: both;
-				}
-			}
-
-			&.left {
-				> .inner {
-					> .content {
-						float: right;
-					}
-
-					> .sidebar {
-						float: right;
-					}
-				}
-			}
-
-			&.right {
-				> .inner {
-					> .content {
-						float: left;
-					}
-
-					> .sidebar {
-						float: left;
-					}
-				}
-			}
+	#banner {
+		> .inner {
+			margin: 0 auto;
 		}
 	}
