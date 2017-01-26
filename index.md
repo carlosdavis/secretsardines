@@ -1,5 +1,6 @@
 ---
 layout: home
+header_class: alt
 
 banner:
   title: We&apos;re getting married!

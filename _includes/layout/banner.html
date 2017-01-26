@@ -32,10 +32,10 @@
 <!-- Banner -->
 	<section id="banner">
 		<div class="inner">
-			<h1>{{ includes.title }}</h1>
-			{% if includes.message %}
+			<h1>{{ include.title }}</h1>
+			{% if include.message %}
 				<p class="actions">
-					{{ message }}
+					{{ include.message }}
 				</p>
 			{% endif %}
 		</div>
