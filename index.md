@@ -1,6 +1,9 @@
 ---
-# You don't need to edit this file, it's empty on purpose.
-# Edit theme's home layout instead if you wanna make some changes
-# See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-layout: default
+layout: home
+
+banner:
+  title: We&apos;re getting married!
+  message: June 24th, 2017 &middot; Maple Falls, Washington
 ---
+
+What do you think of this? How does this look?
